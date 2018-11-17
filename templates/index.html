@@ -1,11 +1,12 @@
 {% load crispy_forms_tags %}
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>EasyTravel</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src={% static 'autocomplete.js' %}></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
@@ -14,35 +15,111 @@
           crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
             integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+    <script src={% static 'leaflet.awesome-markers.js' %}></script>
+    <script>
+        /*list of cities from Romania*/
+        let cities = ["Bucharest","Cluj-Napoca","Timisoara","Iasi","Constanta","Craiova","Brasov","Galati","Ploiesti","Oradea","Braila","Arad","Pitesti","Sibiu","Bacau","Targu Mures","Baia Mare","Buzau","Botosani","Satu Mare","Ramnicu Valcea","Drobeta-Turnu Severin","Suceava","Piatra Neamt","Targu Jiu","Targoviste","Focsani","Bistrita","Tulcea","Resita","Slatina","Calarasi","Alba Iulia","Giurgiu","Deva","Hunedoara","Zalau","Sfantu Gheorghe","Barlad","Vaslui","Roman","Turda","Medias","Slobozia","Alexandria","Voluntari","Lugoj","Medgidia","Onesti","Miercurea Ciuc","Sighetu Marmatiei","Petrosani","Mangalia","Tecuci","Odorheiu Secuiesc","Ramnicu Sarat","Pascani","Dej","Reghin","Navodari","Campina","Mioveni","Campulung","Caracal","Sacele","Fagaras","Fetesti","Sighisoara","Borsa","Rosiorii de Vede","Curtea de Arges","Sebes","Husi","Falticeni","Pantelimon","Oltenita","Turnu Magurele","Caransebes","Dorohoi","Vulcan","Radauti","Zarnesti","Lupeni","Aiud","Petrila","Campia Turzii","Buftea","Tarnaveni","Popesti-Leordeni","Moinesti","Codlea","Cugir","Carei","Gherla","Blaj","Comanesti","Motru","Targu Neamt","Moreni","Targu Secuiesc","Gheorgheni","Orastie","Bals","Baicoi","Dragasani","Salonta","Bailesti","Calafat","Cernavoda","Filiasi","Campulung Moldovenesc","Corabia","Adjud","Breaza","Bocsa","Marghita","Baia Sprie","Bragadiru","Ludus","Urziceni","Viseu de Sus","Rasnov","Buhusi","Stefanesti","Brad","Simleu Silvaniei","Vatra Dornei","Mizil","Cisnadie","Pucioasa","Chitila","Zimnicea","Toplita","Otopeni","Ovidiu","Gura Humorului","Gaesti","Vicovu de Sus","Tandarei","Ocna Mures","Bolintin-Vale","Avrig","Pecica","Simeria","Moldova Noua","Sannicolau Mare","Valenii de Munte","Darmanesti","Dabuleni","Comarnic","Negresti-Oas","Rovinari","Scornicesti","Targu Lapus","Sacueni","Videle","Santana","Oravita","Targu Ocna","Calan","Boldesti-Scaeni","Magurele","Harlau","Draganesti-Olt","Jimbolia","Marasesti","Beius","Beclean","Urlati","Otelu Rosu","Strehaia","Targu Frumos","Orsova","Sinaia","Jibou","Sovata","Costesti","Ianca","Lipova","Dolhasca","Topoloveni","Murfatlar","Nehoiu","Flamanzi","Covasna","Alesd","Valea lui Mihai","Darabani","Hateg","Sangeorz-Bai","Titu","Cristuru Secuiesc","Harsova","Liteni","Nasaud","Podu Iloaiei","Eforie","Odobesti","Huedin","Ineu","Salcea","Seini","Uricani","Babadag","Bumbesti-Jiu","Busteni","Agnita","Iernut","Baraolt","Tasnad","Roznov","Babeni","Negresti","Recas","Macin","Targu Carbunesti","Chisineu-Cris","Siret","Mihailesti","Budesti","Plopeni","Panciu","Calimanesti","Fieni","Somcuta Mare","Intorsura Buzaului","Zlatna","Anina","Curtici","Nadlac","Dumbraveni","Victoria","Amara","Patarlagele","Techirghiol","Pogoanele","Ulmeni","Campeni","Cehu Silvaniei","Tautii-Magheraus","Murgeni","Tismana","Buzias","Segarcea","Saveni","Pancota","Ungheni","Sarmasu","Racari","Talmaciu","Cajvana","Vlahita","Fundulea","Livada","Faget","Teius","Bicaz","Stei","Insuratei","Lehliu Gara","Targu Bujor","Piatra-Olt","Horezu","Deta","Ardud","Balan","Slanic","Brezoi","Sebis","Frasin","Gataia","Potcoava","Miercurea Nirajului","Brosteni","Novaci","Saliste","Copsa Mica","Baneasa","Baia de Arama","Ciacova","Stefanesti","Vanju Mare","Geoagiu","Rupea","Sangeorgiu de Padure","Negru Voda","Abrud","Isaccea","Baile Herculane","Milisauti","Cavnic","Fierbinti-Targ","Salistea de Sus","Balcesti","Berbesti","Predeal","Ghimbav","Azuga","Ticleni","Aninoasa","Bucecea","Slanic Moldova","Baile Olanesti","Miercurea Sibiului","Sulina","Bechet","Faurei","Ocna Sibiului","Baia de Aries","Ocnele Mari","Cazanesti","Dragomiresti","Beresti","Borsec","Baile Govora","Vascau","Solca","Nucet","Baile Tusnad"];
+    </script>
     <link rel="stylesheet" href={% static 'style.css'%} />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">-->
+    <link rel="stylesheet" href={% static 'leaflet.awesome-markers.css'%} />
+    <!--<link rel=”stylesheet” href=”https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+    <!--<script src="https://unpkg.com/ionicons@4.4.7/dist/ionicons.js"></script>-->
 </head>
 <body>
     <div class="overlayContent">
         <h3>Plan your journey</h3>
-        <form action="/process/" method="post">
+        <form action="" method="post">
             {% csrf_token %}
             {{ form.startingPlace|as_crispy_field }}
             {{ form.destinationPlace|as_crispy_field }}
             {{ form.attractions|as_crispy_field }}
-            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Simple collapsible</button>
-            <div id="demo" class="collapse in">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </div>
-            <input type="submit" value="Submit">
+            {{ form.numberOfHours|as_crispy_field }}
+            {{ form.maxNumberOfStops|as_crispy_field }}
+            {{ form.batteryCapacity|as_crispy_field }}
+            <input type="submit" class="btn btn-info" value="Find your awesome route!">
+            <!--<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Simple collapsible</button>-->
+            <!--<div id="demo" class="collapse in">-->
+                <!--Lorem ipsum dolor sit amet, consectetur adipisicing elit,-->
+                <!--sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,-->
+                <!--quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.-->
+            <!--</div>-->
         </form>
+        <p>Envelope icon: <i class="glyphicon glyphicon-envelope icon-white"></i></p>
     </div>
 
     <div id="mapid"></div>
     <script>
-        let mymap = L.map('mapid').setView([46, 25], 7);
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox.streets',
-            accessToken: 'your.mapbox.access.token'
-        }).addTo(mymap);
+        window.onload = function() {
+            let mymap = L.map('mapid').setView([46, 25], 7);
+            L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken: 'your.mapbox.access.token'
+            }).addTo(mymap);
+
+            function getIcon(iconCode) {
+                if( iconCode == 0 )
+                    return "{ icon : source}"
+                else if ( iconCode == 1 )
+                    return "{ icon : destination}"
+                else if ( iconCode == 2 )
+                    return "{ icon : charging}"
+                else if ( iconCode == 3 )
+                    return "{ icon : attraction}"
+                else if ( iconCode == 4 )
+                    return "{ icon : hotel}"
+            }
+
+            // { icon: charging}
+
+            let charging = L.AwesomeMarkers.icon({
+                icon: 'charging-station',
+                markerColor: 'green',
+                prefix: 'fa',
+            });
+
+             let hotel = L.AwesomeMarkers.icon({
+                icon: 'hotel,
+                markerColor: 'blue',
+                prefix: 'fa'
+            });
+
+            let source = L.AwesomeMarkers.icon({
+                icon: 'play',
+                markerColor: 'black',
+                prefix: 'fa'
+            });
+
+            let destination = L.AwesomeMarkers.icon({
+                icon: 'flag-checkered',
+                markerColor: 'black',
+                prefix: 'fa',
+                extraClasses: 'fa-rotate-270'
+            });
+
+            let attraction = L.AwesomeMarkers.icon({
+                icon: 'star',
+                markerColor: 'red',
+                prefix: 'fa',
+            });
+
+            {% for stop in stops %}
+                //iconCode = {{ stop.place.icon }};
+{#                 {{ if({{stop.place.icon}} == 0)}}#}
+                L.marker([{{ stop.place.position.lat }},{{ stop.place.position.lon }}]).addTo(mymap);
+                     {#.bindPopup('Name: {{ o.name }}<br>Voltage: {{ o.voltage }}<br>Amperage: {{ o.amperage }}')#}
+             {% endfor %}
+
+        };
+
+
+        // {#console.log({{ stations.name }} + " " {{ stations.lat }} + " " + {{ stations.lon }});#}
+        // .bindPopup('<strong>Science Hall</strong><br>Where the GISC was born.')
+
+
 
         // var map = new OpenLayers.Map({
         //     div: "map",
@@ -64,6 +141,10 @@
         // });
         //
         // map.addControl(new OpenLayers.Control.LayerSwitcher());
+    </script>
+    <script>
+        autocomplete_departure(document.getElementById("id_startingPlace"), cities);
+        autocomplete_destination(document.getElementById("id_destinationPlace"), cities);
     </script>
 </body>
 </html>

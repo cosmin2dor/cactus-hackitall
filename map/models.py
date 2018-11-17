@@ -13,8 +13,7 @@ class Hotel(models.Model):
     name = models.CharField(max_length=255, blank=False)
     lat = models.DecimalField(max_digits=10, decimal_places=7, blank=False)
     lon = models.DecimalField(max_digits=10, decimal_places=7, blank=False)
-    type = models.CharField(max_length=128, blank=False)
-    rate = models.IntegerField(blank=True)
+    rate = models.IntegerField(blank=True, default=0)
     description = models.TextField(max_length=2000, blank=True)
 
 
@@ -25,3 +24,8 @@ class ChargingStation(models.Model):
     description = models.TextField(max_length=2000, blank=True)
     voltage = models.IntegerField(blank=True, default=120)
     amperage = models.IntegerField(blank=True, default=5)
+
+
+class Waypoint(models.Model):
+    lat = models.DecimalField(max_digits=10, decimal_places=7, blank=False)
+    lon = models.DecimalField(max_digits=10, decimal_places=7, blank=False)

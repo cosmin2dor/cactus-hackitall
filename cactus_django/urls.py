@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from map.views import index
+from map.views import index, populate_database
 
 urlpatterns = [
     path('', index),
     path('admin/', admin.site.urls),
+    path('populate/', populate_database),
 ]

@@ -4,6 +4,20 @@ html, body {
     width: 100%;
     height: 100%;
     font-family: 'Noto Sans TC', sans-serif;
+    overflow: hidden;
+}
+
+input {
+    border: 2px solid #333;
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11),
+                0 5px 15px 0 rgba(0,0,0,0.08);
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 16px;
+}
+input[type=text], input[type=number] {
+    background-color: #f1f1f1;
+    width: 100%;
 }
 
 #mapid {
@@ -26,10 +40,11 @@ html, body {
     z-index: 9999!important;
 }
 
-.overlayContent label {
+.overlayContent #div_id_startingPlace label, .overlayContent #div_id_destinationPlace label, .overlayContent #div_id_attractions label.control-label, #div_id_numberOfHours label.control-label, #div_id_batteryCapacity label.control-label, #div_id_maxNumberOfStops label.control-label  {
     width: 100%;
     display: block;
     text-align: center;
+    font-size: 1.2em;
 }
 
 .overlayContent .control-group .controls input.textInput {
@@ -37,8 +52,12 @@ html, body {
     margin: 0 auto;
 }
 
-#div_id_startingPlace, #div_id_destinationPlace {
+#div_id_startingPlace, #div_id_destinationPlace, #div_id_attractions, #div_id_numberOfHours, #div_id_batteryCapacity, #div_id_maxNumberOfStops {
     margin-bottom: 20px;
+}
+
+.overlayContent #div_id_attractions .controls {
+    margin-left: 60px;
 }
 
 .overlayContent .asteriskField {
@@ -49,4 +68,86 @@ html, body {
     padding: 10px;
     text-align: center;
 }
+
+.overlayContent .btn-info {
+    display: block;
+    margin: 0 auto;
+    background-color: #333;
+    border-color: #333;
+}
+
+.overlayContent .btn-info:hover {
+    background-color: #111;
+    border-color: #111;
+}
+
+/*Below - START of Autocomplete CSS*/
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 9999!important;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 160px;
+    left: 10px;
+    right: 10px;
+}
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: beige;
+    border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #333;
+    color: beige;
+}
+
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: #333 !important;
+    color: beige;
+}
+
+/*------------------- Now for Destination*/
+.autocomplete-destination-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 9999!important;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 255px;
+    left: 10px;
+    right: 10px;
+}
+.autocomplete-destination-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: beige;
+    border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-destionation-items div:hover {
+    /*when hovering an item:*/
+    background-color: #333;
+    color: beige;
+}
+
+.autocomplete-destination-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: #333 !important;
+    color: beige;
+}
+
+/*Above - END of Autocomplete CSS*/
+
+
 
