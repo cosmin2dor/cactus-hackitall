@@ -1,1 +1,0 @@
-from imposm.parser import OSMParser
