@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'django.contrib.gis',
     'map',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
