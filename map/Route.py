@@ -139,6 +139,7 @@ def getAround(lat, lon, radius, type):
 
 def get_route_details(source, dest):
     coords = [(source.lon, source.lat), (dest.lon, dest.lat)]
+    # TODO Change with OSRM server
     url = "http://192.168.43.188:5000/route/v1/driving/"
 
     params = ""

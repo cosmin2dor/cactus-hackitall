@@ -76,6 +76,7 @@
                 {% endfor %}
             ],
             router: new L.Routing.OSRMv1({
+            {#    TODO Change with OSRM server ip#}
             serviceUrl: 'http://192.168.43.188:5000/route/v1'
             }),
             routeWhileDragging: true,
