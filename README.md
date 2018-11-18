@@ -1,3 +1,3 @@
 # cactus-hackitall
 
-Blank Django Project, code snippets free.
+Electric Travel Guide, smart routing app for electric vehicles :)
