@@ -14,6 +14,14 @@
         {{ form.batteryCapacity|as_crispy_field }}
         <input type="submit" class="btn btn-info" value="Find your awesome route!">
     </form>
+    {% if qr_link != "" %}
+    <button type="button" class="qr btn btn-secondary" onclick="qrFunction()">
+        Go on the ride!
+    </button>
+    {% endif %}
+    <div id="qr" style="display:none">
+        <img src="data:image/png;base64, {{ qr_link }}">
+    </div>
 </div>
 
 <div id="mapid"></div>
@@ -58,39 +66,37 @@
 
          {% for stop in stops %}
              L.marker([{{ stop.place.position.lat }},{{ stop.place.position.lon }}], { icon: {{ stop.place.icon }} }).addTo(mymap)
-                 .bindPopup('<h2 style="text-align: center">Trip details</h2><br><h4>Arrive At: {{ stop.formated_arrival }}<br>Leave At: {{ stop.formated_departure }}<br>Battery Level: {{ stop.current_battery|floatformat:2 }}%</h4><br><h2 style="text-align: center">Location details</h2><br><h4></h4>');
+                 .bindPopup('<h2 style="text-align: center">Trip details</h2><br><h4>Arrive At: {{ stop.formated_arrival }}<br>Leave At: {{ stop.formated_departure }}<br>Battery Level: {{ stop.current_battery|floatformat:2 }}%</h4><br><h2 style="text-align: center">Location details</h2><h3 style="text-align: center">{{ stop.place.name }}<br></h3>');
          {% endfor %}
 
-        L.Routing.control({
+        var control = L.Routing.control({
             waypoints: [
                 {% for stop in stops %}
                     L.latLng({{stop.place.position.lat}}, {{stop.place.position.lon}}),
                 {% endfor %}
             ],
             router: new L.Routing.OSRMv1({
-            serviceUrl: 'http://10.81.168.177:5000/route/v1'
+            serviceUrl: 'http://192.168.43.188:5000/route/v1'
             }),
             routeWhileDragging: true,
             createMarker: function() { return null; },
             waypointMode: 'snap'
         }).addTo(mymap);
 
+        {% if qr_link == "" %}
+            control.hide();
+        {% else %}
+            control.show();
+        {% endif %}
     };
 
 </script>
-<div id="qr">
-    {% if qr_link != "" %}
-        <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-content="">
-            Go on the ride!
-        </button>
-    {% endif %}
-</div>
 <script>
 $(document).ready(function(){
     let image = '<img src="data:image/png;base64, {{ qr_link }}">';
     $('[data-toggle="popover"]').popover(
         {
-            placement: 'top',
+            placement: 'left',
             content: image,
             html: true
         }
@@ -99,6 +105,16 @@ $(document).ready(function(){
     // if ({{stops}} == [] )
     //     document.getElementsByClassName("leaflet-right").style.display = "none";
 });
+
+    function qrFunction() {
+        let x = document.getElementById("qr");
+
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
 </script>
 <script>
     autocomplete_departure(document.getElementById("id_startingPlace"), cities);

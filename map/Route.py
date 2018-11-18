@@ -22,6 +22,12 @@ from datetime import datetime, timedelta
 R = 6373.0
 CAR_CONSUMPTION = 0.175
 
+preferences_dict = {
+    'art': ['artwork', 'attraction', 'gallery', 'museum'],
+    'kids': ['aquarium', 'attraction', 'theme_park', 'zoo'],
+    'nature': ['attraction'],
+}
+
 
 def parseXML(e, type):
     for node in e.findall('node'):
@@ -133,7 +139,7 @@ def getAround(lat, lon, radius, type):
 
 def get_route_details(source, dest):
     coords = [(source.lon, source.lat), (dest.lon, dest.lat)]
-    url = "http://10.81.168.177:5000/route/v1/driving/"
+    url = "http://192.168.43.188:5000/route/v1/driving/"
 
     params = ""
 
@@ -228,6 +234,8 @@ class Route:
         self.visited_a = []
         self.visited_c = []
         self.visited_h = []
+        self.uptime = 0
+        self.offset = 0
 
     # icons
     # 0 - SOURCE
@@ -263,9 +271,13 @@ class Route:
         return R * c
 
     def get_nearest(self, position, radius, type):
+        types = ['attraction']
+        for i in self.attraction_prefs:
+            types = types + preferences_dict[i]
+
         if type == "Attraction":
             for a in A.objects.all():
-                if a.pk in self.visited_a:
+                if a.pk in self.visited_a or a.type not in types:
                     continue
                 elif Route.distance_between(a, position) < radius:
                     self.visited_a.append(a.pk)
@@ -283,17 +295,19 @@ class Route:
 
             self.visited_c.append(nearest_station.pk)
             return nearest_station
+        elif type == "Hotel":
+            min_distance = 9999
+            nearest_hotel = None
+            for h in H.objects.all():
+                distance = Route.distance_between(h, position)
+                if distance < min_distance:
+                    if h.pk not in self.visited_h:
+                        min_distance = distance
+                        nearest_hotel = h
 
+            self.visited_h.append(nearest_hotel.pk)
+            return nearest_hotel
 
-
-        # elif type == "Hotel":
-        #     for h in H.objects.all():
-        #         if DEG2KM * Route.distance_between(np.array([h.lat, h.lon]), np.array([position])) < radius:
-        #             return h
-        # elif type == "ChargingStation":
-        #     for s in C.objects.all():
-        #         if DEG2KM * Route.distance_between(np.array([s.lat, s.lon]), np.array([position])) < radius:
-        #             return s
 
     def is_battery_reachable(self, current_stop):
         nearest_station = self.get_nearest(current_stop.place.position, 0, "ChargingStation")
@@ -307,7 +321,8 @@ class Route:
 
 
 
-    def start(self):
+    def start(self, attraction_prefs):
+        self.attraction_prefs = attraction_prefs
         # Initial route setup
         start_place = Place("Departure Place", Waypoint(self.source[0], self.source[1]), "You are going to leave this place.", "S")
         destination_place = Place("Arrival Place", Waypoint(self.destination[0], self.destination[1]), "Your destination, so that you know that.", "D")
@@ -315,17 +330,13 @@ class Route:
         (total_distance, total_duration) = get_route_details(start_place.position, destination_place.position)
         energy_consumption = CAR_CONSUMPTION * total_distance
 
-        total_chr_time = ((energy_consumption - self.max_capacity) * (248 * 96)) / 3600
+        total_chr_time = ((energy_consumption - self.max_capacity) * (248 * 96)) / 3600 + 1
 
         if total_chr_time < 0:
             total_chr_time = 0
 
-        print(str(self.max_time))
-
         while self.max_time - total_chr_time - self.max_hops - total_duration / 3600 < 0:
             self.max_hops = self.max_hops - 1
-
-        print(self.max_hops)
 
         start_stop = Stop(start_place, 0.0, 100.0, self.max_hops)
         destination_stop = Stop(destination_place, 0.0, 0, 0)
@@ -333,7 +344,9 @@ class Route:
         self.stops = [start_stop]
 
         # Starting the recursion
-        self.recursion(start_stop, destination_stop)
+        exit = self.recursion(start_stop, destination_stop)
+        if exit == -1:
+            return -1
         self.stops.append(destination_stop)
 
         return self.stops
@@ -345,23 +358,42 @@ class Route:
         distance = Route.distance_between(start_stop.place.position, end_stop.place.position)
         direction = (d - s) / distance
 
-        mid_point = s + direction * (distance / self.max_hops)
+        if self.offset == 0:
+            self.offset = distance / self.max_hops
+
+        mid_point = s + direction * self.offset
 
         nearest_attraction = self.get_nearest(Waypoint(mid_point[0], mid_point[1]), 10, "Attraction")
         (distance_to, duration_to) = get_route_details(start_stop.place.position, Waypoint(nearest_attraction.lat, nearest_attraction.lon))
+        self.uptime = self.uptime + duration_to / 3600
 
         new_place = Place(nearest_attraction.name, Waypoint(nearest_attraction.lat, nearest_attraction.lon), nearest_attraction.description, "A")
         new_stop = Stop(new_place, start_stop.departure_time + (duration_to / 3600), start_stop.current_battery - ((distance_to * CAR_CONSUMPTION) / self.max_capacity) * 100, start_stop.hops - 1)
-        new_stop.randomize_wait(0.5, 2.0)
+        new_stop.randomize_wait(0.5, 1.0)
 
         if not self.is_battery_reachable(new_stop):
             nearest_station = self.get_nearest(start_stop.place.position, 0, "ChargingStation")
             new_place = Place(nearest_station.name, Waypoint(nearest_station.lat, nearest_station.lon), nearest_station.description, "C")
             (distance_to, duration_to) = get_route_details(start_stop.place.position, Waypoint(nearest_station.lat, nearest_station.lon))
+            self.uptime = self.uptime + duration_to / 3600
             new_stop = Stop(new_place, start_stop.departure_time + (duration_to / 3600),
-                            100,
+                            start_stop.current_battery - ((distance_to * CAR_CONSUMPTION) / self.max_capacity) * 100,
                             start_stop.hops - 1)
-            new_stop.fuel_time(nearest_station.voltage, nearest_station.amperage, self.max_capacity)
+            # new_stop.fuel_time(nearest_station.voltage, nearest_station.amperage, self.max_capacity)
+            new_stop.fuel_time(240, 96, self.max_capacity)
+        elif self.uptime >= 8:
+            nearest_hotel = self.get_nearest(start_stop.place.position, 0, "Hotel")
+            new_place = Place(nearest_hotel.name, Waypoint(nearest_hotel.lat, nearest_hotel.lon), nearest_hotel.description, "H")
+            (distance_to, duration_to) = get_route_details(start_stop.place.position,
+                                                           Waypoint(nearest_hotel.lat, nearest_hotel.lon))
+            self.uptime = 0
+            new_stop = Stop(new_place, start_stop.departure_time + (duration_to / 3600),
+                            start_stop.current_battery - ((distance_to * CAR_CONSUMPTION) / self.max_capacity) * 100,
+                            start_stop.hops - 1)
+            new_stop.sleep()
+
+        if new_stop.current_battery <= 0:
+            return -1
 
         self.stops.append(new_stop)
 
@@ -373,6 +405,9 @@ class Route:
             end_stop.current_battery = new_stop.current_battery - ((distance_to * CAR_CONSUMPTION) / self.max_capacity) * 100
             end_stop.departure_time = end_stop.current_time
             end_stop.format_dates()
+
+            if end_stop.current_battery <= 0:
+                return -1
             return
 
 
@@ -407,7 +442,12 @@ class Stop:
         till_full = (1.0 - (self.current_battery / 100)) * max_capacity
         charging_time = till_full / ((volts * amps) / 1000)
         self.departure_time = self.current_time + charging_time
-        print(charging_time)
+        print("Charging Time" + self.current_battery.__str__())
+        self.current_battery = 100
+        self.format_dates()
+
+    def sleep(self):
+        self.departure_time = self.current_time + 6.0
         self.format_dates()
 
 class Place:

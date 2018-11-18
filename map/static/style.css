@@ -37,7 +37,7 @@ input[type=text], input[type=number] {
     border-radius: 4px;
     box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11),
                 0 5px 15px 0 rgba(0,0,0,0.08);
-    z-index: 9999!important;
+    z-index: 9996!important;
 }
 
 .overlayContent #div_id_startingPlace label, .overlayContent #div_id_destinationPlace label, .overlayContent #div_id_attractions label.control-label, #div_id_numberOfHours label.control-label, #div_id_batteryCapacity label.control-label, #div_id_maxNumberOfStops label.control-label  {
@@ -164,20 +164,47 @@ input[type=text], input[type=number] {
 }
 
 #qr {
-    position: absolute;
-    top: 88%;
-    left: 80px;
-    z-index: 9999!important;
+    margin-left: -10px;
+    margin-top: -300px;
 }
 
-#qr button {
-    background-color: #222;
-    color: #ccc;
+#qr img {
+    width: 300px;
+    height: 300px;
+    transition: height 500ms ease-in-out;
+}
+.qr {
+    background-color: #333;
+    color: #fff;
+    margin-top: 10px !important;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+}
+
+.qr:focus, .qr:active {
+    color: #FFF;
+}
+
+.qr:hover {
+    background-color: #111;
+    border-color: #111;
+    color: #FFF;
 }
 
 .leaflet-routing-alt h2, .leaflet-routing-alt h3{
     display: none;
 }
+
+.leaflet-control-container .leaflet-routing-container-hide {
+    display: none;
+}
+
+/*.popover-content {*/
+    /*display: block;*/
+    /*margin-left: 0px;*/
+    /*margin-top: -500px;*/
+/*}*/
 
 
 

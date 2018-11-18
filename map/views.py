@@ -4,7 +4,18 @@ from django.shortcuts import render
 from .forms import UserInputForm
 
 from .models import Attraction, ChargingStation, Hotel
-from .Route import Route
+from .Route import Route, Waypoint
+
+
+def fix_duplicates(request):
+    for c1 in ChargingStation.objects.all():
+        for c2 in ChargingStation.objects.all():
+            if c1.pk == c2.pk:
+                continue
+            distance = Route.distance_between(Waypoint(c1.lat, c1.lon), Waypoint(c2.lat, c2.lon))
+            print(distance)
+
+    return render(request, "index.html", {'form': UserInputForm()})
 
 
 def populate_database(request):
@@ -99,9 +110,14 @@ def index(request):
         max_hops = form.cleaned_data['maxNumberOfStops']
         max_hours = form.cleaned_data['numberOfHours']
         capacity = form.cleaned_data['batteryCapacity']
+        attractions = form.cleaned_data['attractions']
         route = Route(source, destination, max_hops, max_hours, capacity)
-        stops = route.start()
-        qr = route.generate_QR(stops)
+        stops = route.start(attractions)
+
+        if stops == -1:
+            return render(request, "index.html", {'form': UserInputForm()})
+        else:
+            qr = route.generate_QR(stops)
 
     return render(request, "index.html", {'form': form,
                                           'stops': stops,

@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from map.views import index, populate_database
+from map.views import index, populate_database, fix_duplicates
 
 urlpatterns = [
     path('', index),
     path('admin/', admin.site.urls),
     path('populate/', populate_database),
+    path('fix/', fix_duplicates),
 ]
