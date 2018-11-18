@@ -1,0 +1,32 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>EasyTravel</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src={% static 'autocomplete.js' %}></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+          integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+          crossorigin=""/>
+    <link rel="stylesheet" href={% static 'leaflet-routing-machine.css'%} />
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+            integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+    <script src={% static 'leaflet-routing-machine.js' %}></script>
+    <script src={% static 'leaflet.awesome-markers.js' %}></script>
+    <script>
+    /*list of cities from Romania*/
+    let cities = ["Bucharest","Cluj-Napoca","Timisoara","Iasi","Constanta","Craiova","Brasov","Galati","Ploiesti","Oradea","Braila","Arad","Pitesti","Sibiu","Bacau","Targu Mures","Baia Mare","Buzau","Botosani","Satu Mare","Ramnicu Valcea","Drobeta-Turnu Severin","Suceava","Piatra Neamt","Targu Jiu","Targoviste","Focsani","Bistrita","Tulcea","Resita","Slatina","Calarasi","Alba Iulia","Giurgiu","Deva","Hunedoara","Zalau","Sfantu Gheorghe","Barlad","Vaslui","Roman","Turda","Medias","Slobozia","Alexandria","Voluntari","Lugoj","Medgidia","Onesti","Miercurea Ciuc","Sighetu Marmatiei","Petrosani","Mangalia","Tecuci","Odorheiu Secuiesc","Ramnicu Sarat","Pascani","Dej","Reghin","Navodari","Campina","Mioveni","Campulung","Caracal","Sacele","Fagaras","Fetesti","Sighisoara","Borsa","Rosiorii de Vede","Curtea de Arges","Sebes","Husi","Falticeni","Pantelimon","Oltenita","Turnu Magurele","Caransebes","Dorohoi","Vulcan","Radauti","Zarnesti","Lupeni","Aiud","Petrila","Campia Turzii","Buftea","Tarnaveni","Popesti-Leordeni","Moinesti","Codlea","Cugir","Carei","Gherla","Blaj","Comanesti","Motru","Targu Neamt","Moreni","Targu Secuiesc","Gheorgheni","Orastie","Bals","Baicoi","Dragasani","Salonta","Bailesti","Calafat","Cernavoda","Filiasi","Campulung Moldovenesc","Corabia","Adjud","Breaza","Bocsa","Marghita","Baia Sprie","Bragadiru","Ludus","Urziceni","Viseu de Sus","Rasnov","Buhusi","Stefanesti","Brad","Simleu Silvaniei","Vatra Dornei","Mizil","Cisnadie","Pucioasa","Chitila","Zimnicea","Toplita","Otopeni","Ovidiu","Gura Humorului","Gaesti","Vicovu de Sus","Tandarei","Ocna Mures","Bolintin-Vale","Avrig","Pecica","Simeria","Moldova Noua","Sannicolau Mare","Valenii de Munte","Darmanesti","Dabuleni","Comarnic","Negresti-Oas","Rovinari","Scornicesti","Targu Lapus","Sacueni","Videle","Santana","Oravita","Targu Ocna","Calan","Boldesti-Scaeni","Magurele","Harlau","Draganesti-Olt","Jimbolia","Marasesti","Beius","Beclean","Urlati","Otelu Rosu","Strehaia","Targu Frumos","Orsova","Sinaia","Jibou","Sovata","Costesti","Ianca","Lipova","Dolhasca","Topoloveni","Murfatlar","Nehoiu","Flamanzi","Covasna","Alesd","Valea lui Mihai","Darabani","Hateg","Sangeorz-Bai","Titu","Cristuru Secuiesc","Harsova","Liteni","Nasaud","Podu Iloaiei","Eforie","Odobesti","Huedin","Ineu","Salcea","Seini","Uricani","Babadag","Bumbesti-Jiu","Busteni","Agnita","Iernut","Baraolt","Tasnad","Roznov","Babeni","Negresti","Recas","Macin","Targu Carbunesti","Chisineu-Cris","Siret","Mihailesti","Budesti","Plopeni","Panciu","Calimanesti","Fieni","Somcuta Mare","Intorsura Buzaului","Zlatna","Anina","Curtici","Nadlac","Dumbraveni","Victoria","Amara","Patarlagele","Techirghiol","Pogoanele","Ulmeni","Campeni","Cehu Silvaniei","Tautii-Magheraus","Murgeni","Tismana","Buzias","Segarcea","Saveni","Pancota","Ungheni","Sarmasu","Racari","Talmaciu","Cajvana","Vlahita","Fundulea","Livada","Faget","Teius","Bicaz","Stei","Insuratei","Lehliu Gara","Targu Bujor","Piatra-Olt","Horezu","Deta","Ardud","Balan","Slanic","Brezoi","Sebis","Frasin","Gataia","Potcoava","Miercurea Nirajului","Brosteni","Novaci","Saliste","Copsa Mica","Baneasa","Baia de Arama","Ciacova","Stefanesti","Vanju Mare","Geoagiu","Rupea","Sangeorgiu de Padure","Negru Voda","Abrud","Isaccea","Baile Herculane","Milisauti","Cavnic","Fierbinti-Targ","Salistea de Sus","Balcesti","Berbesti","Predeal","Ghimbav","Azuga","Ticleni","Aninoasa","Bucecea","Slanic Moldova","Baile Olanesti","Miercurea Sibiului","Sulina","Bechet","Faurei","Ocna Sibiului","Baia de Aries","Ocnele Mari","Cazanesti","Dragomiresti","Beresti","Borsec","Baile Govora","Vascau","Solca","Nucet","Baile Tusnad"];
+    </script>
+    <link rel="stylesheet" href={% static 'style.css'%} />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href={% static 'leaflet.awesome-markers.css'%} />
+</head>
+    <body>
+        {% block content %}{% endblock content %}
+    </body>
+</html>

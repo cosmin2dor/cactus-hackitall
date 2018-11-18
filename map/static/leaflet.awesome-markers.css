@@ -7,8 +7,8 @@ Version: 1.0
 /* Marker setup */
 .awesome-marker {
   background: url('images/markers-soft.png') no-repeat 0 0;
-  width: 35px;
-  height: 46px;
+  width: 45px;
+  height: 56px;
   position:absolute;
   left:0;
   top:0;
@@ -109,6 +109,12 @@ Version: 1.0
 
 .awesome-marker-icon-white {
   background-position: -574px 0;
+}
+
+.qr {
+  position: absolute !important;
+  top: 90%;
+  left: 20px;
 }
 
 .awesome-marker-icon-gray {

@@ -12,7 +12,6 @@ def populate_database(request):
     Hotel.objects.all().delete()
     ChargingStation.objects.all().delete()
 
-
     e = xml.parse('map/database.osm').getroot()
 
     for node in e.findall('node'):
@@ -39,10 +38,13 @@ def populate_database(request):
                 name = default_station_name
                 chargingStation = True
 
+            # if tag.attrib["k"] == "tourism" and (tag.attrib["v"] == "hotel" or tag.attrib["v"] == "guest_house" or tag.attrib["v"] == "hostel" or tag.attrib["v"] == "chalet" or tag.attrib["v"] == "camp_site" or tag.attrib["v"] == "apartment" or tag.attrib["v"] == "motel" or tag.attrib["v"] == "caravan_site"):
+            #     hotel = True
+
             if tag.attrib["k"] == "tourism" and tag.attrib["v"] == "hotel":
                 hotel = True
 
-            if tag.attrib["k"] == "tourism" and tag.attrib["v"] != "hotel":
+            if tag.attrib["k"] == "tourism" and (tag.attrib["v"] == "zoo" or tag.attrib["v"] == "aquarium" or tag.attrib["v"] == "artwork" or tag.attrib["v"] == "attraction" or tag.attrib["v"] == "gallery" or tag.attrib["v"] == "museum" or tag.attrib["v"] == "theme_park" or tag.attrib["v"] == "zoo"):
                 attraction = True
 
         # set variables
@@ -89,16 +91,18 @@ def index(request):
         form = UserInputForm()
 
     stops = []
+    qr = ""
 
     if form.is_valid():
         source = form.cleaned_data['startingPlace']
         destination = form.cleaned_data['destinationPlace']
         max_hops = form.cleaned_data['maxNumberOfStops']
         max_hours = form.cleaned_data['numberOfHours']
-        route = Route(source, destination, max_hops, max_hours)
+        capacity = form.cleaned_data['batteryCapacity']
+        route = Route(source, destination, max_hops, max_hours, capacity)
         stops = route.start()
-
-        print(stops)
+        qr = route.generate_QR(stops)
 
     return render(request, "index.html", {'form': form,
-                                          'stops': stops})
+                                          'stops': stops,
+                                          'qr_link': qr})

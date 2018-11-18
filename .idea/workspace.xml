@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6545ab5-859e-4947-b0b0-40cdc9a7bc23" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/map/Route.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cactus_django.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cactus_django.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cactus_django/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cactus_django/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/map/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/map/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/Route.py" beforeDir="false" afterPath="$PROJECT_DIR$/map/Route.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/map/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/map/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/static/leaflet.awesome-markers.css" beforeDir="false" afterPath="$PROJECT_DIR$/map/static/leaflet.awesome-markers.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/map/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/map/static/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/map/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/map/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
@@ -64,38 +63,39 @@
     <session id="99344677">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.110" value="1" />
           <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.8" value="2" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="5" />
-          <entry key="html" value="243" />
+          <entry key="html" value="701" />
           <entry key="md" value="60" />
-          <entry key="py" value="4859" />
+          <entry key="py" value="9250" />
           <entry key="py@cactus_django" value="82" />
-          <entry key="txt" value="98" />
+          <entry key="txt" value="125" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CommandLine" value="31" />
-          <entry key="HTML" value="243" />
+          <entry key="HTML" value="701" />
           <entry key="Markdown" value="60" />
-          <entry key="PLAIN_TEXT" value="154" />
-          <entry key="Python" value="4859" />
+          <entry key="PLAIN_TEXT" value="181" />
+          <entry key="Python" value="9250" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="1" />
-          <entry key="html" value="8" />
+          <entry key="html" value="11" />
           <entry key="md" value="1" />
           <entry key="py" value="12" />
           <entry key="txt" value="1" />
@@ -104,7 +104,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="1" />
-          <entry key="HTML" value="8" />
+          <entry key="HTML" value="11" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Python" value="12" />
@@ -141,7 +141,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cactus_django/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
+            <state relative-caret-position="541">
               <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
               <folding>
                 <element signature="e#637#669#0" expanded="true" />
@@ -153,13 +153,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/map/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="25" column="12" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="12" />
+            <state relative-caret-position="541">
+              <caret line="25" column="57" selection-start-line="25" selection-start-column="55" selection-end-line="25" selection-end-column="57" />
               <folding>
-                <marker date="1542466980421" expanded="true" signature="62:395" ph="..." />
-                <marker date="1542466980421" expanded="true" signature="748:749" ph="..." />
-                <marker date="1542466980421" expanded="true" signature="748:751" ph="..." />
-                <marker date="1542466980421" expanded="true" signature="1209:1210" ph="..." />
+                <marker date="1542514605404" expanded="true" signature="62:325" ph="..." />
+                <marker date="1542514605404" expanded="true" signature="608:609" ph="..." />
+                <marker date="1542514605404" expanded="true" signature="608:611" ph="..." />
+                <marker date="1542514605404" expanded="true" signature="1000:1001" ph="..." />
               </folding>
             </state>
           </provider>
@@ -174,11 +174,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="111" column="22" selection-start-line="111" selection-start-column="22" selection-end-line="111" selection-end-column="22" />
+            <state relative-caret-position="214">
+              <caret line="60" column="295" lean-forward="true" selection-start-line="60" selection-start-column="295" selection-end-line="60" selection-end-column="295" />
             </state>
           </provider>
         </entry>
@@ -186,8 +186,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/map/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2271">
-              <caret line="96" column="54" selection-start-line="96" selection-start-column="54" selection-end-line="96" selection-end-column="54" />
+            <state relative-caret-position="466">
+              <caret line="107" column="50" selection-start-line="107" selection-start-column="43" selection-end-line="107" selection-end-column="50" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -204,16 +204,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/map/Route.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="111" column="60" lean-forward="true" selection-start-line="111" selection-start-column="60" selection-end-line="111" selection-end-column="60" />
+            <state relative-caret-position="171">
+              <caret line="390" column="28" selection-start-line="390" selection-start-column="13" selection-end-line="390" selection-end-column="28" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <marker date="1542486444333" expanded="true" signature="5575:5658" ph="..." />
-                <marker date="1542486444333" expanded="true" signature="5670:5675" ph="..." />
-                <marker date="1542486444333" expanded="true" signature="6157:6307" ph="..." />
+                <element signature="e#0#25#0" expanded="true" />
+                <marker date="1542516135873" expanded="true" signature="13114:13292" ph="..." />
               </folding>
             </state>
           </provider>
@@ -232,6 +230,10 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>market</find>
+      <find>stops</find>
+      <find>Stop</find>
+      <find>Way</find>
+      <find>get_route_details</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -253,10 +255,10 @@
         <option value="$PROJECT_DIR$/map/db_populate.py" />
         <option value="$PROJECT_DIR$/cactus_django/urls.py" />
         <option value="$PROJECT_DIR$/map/admin.py" />
-        <option value="$PROJECT_DIR$/map/models.py" />
         <option value="$PROJECT_DIR$/map/views.py" />
-        <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/map/models.py" />
         <option value="$PROJECT_DIR$/map/Route.py" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
       </list>
     </option>
   </component>
@@ -278,7 +280,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -294,25 +295,13 @@
             <path>
               <item name="cactus_django" type="b2602c69:ProjectViewProjectNode" />
               <item name="cactus_django" type="462c0819:PsiDirectoryNode" />
-              <item name="map" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cactus_django" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cactus_django" type="462c0819:PsiDirectoryNode" />
-              <item name="map" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cactus_django" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cactus_django" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -341,6 +330,28 @@
     </option>
   </component>
   <component name="RunManager" selected="Django server.cactus_django">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="cactus_django" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="models" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="cactus_django" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -474,7 +485,14 @@
       <option name="project" value="LOCAL" />
       <updated>1542462795865</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="ceva timp mai tarziu">
+      <created>1542486669224</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1542486669224</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -490,13 +508,13 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49848023" visible="true" weight="0.19189766" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49848023" visible="true" weight="0.19402985" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50151974" side_tool="true" weight="0.19189766" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.28633407" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.30694142" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.29284164" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
@@ -512,6 +530,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="right" id="Database" order="4" weight="0.32995737" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="5" side_tool="true" weight="0.32995737" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -527,7 +546,8 @@
     <MESSAGE value="basic map view" />
     <MESSAGE value="basic map view + userinput form" />
     <MESSAGE value="db models" />
-    <option name="LAST_COMMIT_MESSAGE" value="db models" />
+    <MESSAGE value="ceva timp mai tarziu" />
+    <option name="LAST_COMMIT_MESSAGE" value="ceva timp mai tarziu" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/map/static/style.css">
@@ -550,13 +570,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/map/osmparser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="18" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/map/osmparser.py" />
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/overpass/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
@@ -564,13 +578,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/map/overpass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/map/overpass.py" />
     <entry file="file://$PROJECT_DIR$/templates/test.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -578,20 +586,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/map/output.osm">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cactus_django/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="89" column="1" selection-start-line="89" selection-start-column="1" selection-end-line="89" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/map/output.osm" />
     <entry file="file://$USER_HOME$/.PyCharm2018.2/system/python_stubs/-2124151817/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
           <caret line="5484" column="6" selection-start-line="5484" selection-start-column="6" selection-end-line="5484" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/map/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="541">
+          <caret line="25" column="57" selection-start-line="25" selection-start-column="55" selection-end-line="25" selection-end-column="57" />
+          <folding>
+            <marker date="1542514605404" expanded="true" signature="62:325" ph="..." />
+            <marker date="1542514605404" expanded="true" signature="608:609" ph="..." />
+            <marker date="1542514605404" expanded="true" signature="608:611" ph="..." />
+            <marker date="1542514605404" expanded="true" signature="1000:1001" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -605,6 +617,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cactus_django/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="541">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+          <folding>
+            <element signature="e#637#669#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cactus_django/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="89" column="1" selection-start-line="89" selection-start-column="1" selection-end-line="89" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/map/db_populate.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -612,15 +641,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/map/models.py">
+    <entry file="file://$PROJECT_DIR$/map/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="25" column="12" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="12" />
+        <state relative-caret-position="466">
+          <caret line="107" column="50" selection-start-line="107" selection-start-column="43" selection-end-line="107" selection-end-column="50" />
           <folding>
-            <marker date="1542466980421" expanded="true" signature="62:395" ph="..." />
-            <marker date="1542466980421" expanded="true" signature="748:749" ph="..." />
-            <marker date="1542466980421" expanded="true" signature="748:751" ph="..." />
-            <marker date="1542466980421" expanded="true" signature="1209:1210" ph="..." />
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -632,43 +658,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="111" column="22" selection-start-line="111" selection-start-column="22" selection-end-line="111" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cactus_django/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-          <folding>
-            <element signature="e#637#669#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/map/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2271">
-          <caret line="96" column="54" selection-start-line="96" selection-start-column="54" selection-end-line="96" selection-end-column="54" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/map/Route.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="111" column="60" lean-forward="true" selection-start-line="111" selection-start-column="60" selection-end-line="111" selection-end-column="60" />
+        <state relative-caret-position="171">
+          <caret line="390" column="28" selection-start-line="390" selection-start-column="13" selection-end-line="390" selection-end-column="28" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1542486444333" expanded="true" signature="5575:5658" ph="..." />
-            <marker date="1542486444333" expanded="true" signature="5670:5675" ph="..." />
-            <marker date="1542486444333" expanded="true" signature="6157:6307" ph="..." />
+            <element signature="e#0#25#0" expanded="true" />
+            <marker date="1542516135873" expanded="true" signature="13114:13292" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="60" column="295" lean-forward="true" selection-start-line="60" selection-start-column="295" selection-end-line="60" selection-end-column="295" />
         </state>
       </provider>
     </entry>
